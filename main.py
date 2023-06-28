@@ -1,3 +1,4 @@
+from datetime import datetime
 import xml.etree.ElementTree as Et
 
 import requests
@@ -37,6 +38,12 @@ def save_to_xml(entries, batch_number):
     tree = Et.ElementTree(root)
     file_name = f"movies_{batch_number:02d}.xml"
     tree.write(f"data/{file_name}")
+
+
+def fake_update():
+    today = datetime.now()
+    with open("data/today.txt", "w") as f:
+        f.write(str(today))
 
 
 if __name__ == '__main__':
