@@ -47,6 +47,7 @@ def fake_update():
 
 
 if __name__ == '__main__':
+    fake_update()
     movies = get_movie_data(1)
     batch_size = 10
     for i in range(0, len(movies), batch_size):
