@@ -54,7 +54,7 @@ def save_to_html(entries):
     html_list = []
     for entry in entries:
         html_list.append(f'<h1>{entry["title"]}</h1>')
-        html_list.append(f'<img src="{entry["image"]}" loading="lazy" />')
+        html_list.append(f'<img src="{entry["image"]}" loading="lazy" style="max-width: 300px;"/>')
 
     html_content = "".join(html_list)
     html_footer = """
