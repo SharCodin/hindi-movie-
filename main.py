@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 import xml.etree.ElementTree as Et
 
@@ -53,3 +54,5 @@ if __name__ == '__main__':
     for i in range(0, len(movies), batch_size):
         batch = movies[i:i + batch_size]
         save_to_xml(batch, i // batch_size + 1)
+    os.system('git add . && git commit -m "auto generate xml." && git push')
+    
