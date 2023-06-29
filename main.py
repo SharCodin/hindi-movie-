@@ -41,6 +41,33 @@ def save_to_xml(entries, batch_number):
     tree.write(f"data/{file_name}")
 
 
+def save_to_html(entries):
+    html_header = """
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <title>Page Title</title>
+        </head>
+        <body>
+    """
+
+    html_list = []
+    for entry in entries:
+        html_list.append(f'<h1>{entry["title"]}</h1>')
+        html_list.append(f'<img src="{entry["image"]}" loading="lazy" />')
+
+    html_content = "".join(html_list)
+    html_footer = """
+        </body>
+        </html>
+    """
+
+    with open("data/page.html", "w", encoding="utf-8") as f:
+        f.write(html_header)
+        f.write(html_content)
+        f.write(html_footer)
+
+
 def fake_update():
     today = datetime.now()
     with open("data/today.txt", "w") as f:
@@ -50,9 +77,9 @@ def fake_update():
 if __name__ == '__main__':
     fake_update()
     movies = get_movie_data(1)
+    save_to_html(movies)
     batch_size = 10
     for i in range(0, len(movies), batch_size):
         batch = movies[i:i + batch_size]
         save_to_xml(batch, i // batch_size + 1)
     os.system('git add . && git commit -m "auto generate xml." && git push')
-    
