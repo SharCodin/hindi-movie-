@@ -48,7 +48,13 @@ def save_to_html(entries):
         <head>
         <title>Page Title</title>
         <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
             img {
+                min-width: 300px;
                 max-width: 300px;
             }
         </style>
