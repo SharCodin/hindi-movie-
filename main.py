@@ -73,7 +73,7 @@ def save_to_html(entries):
         </html>
     """
 
-    with open("data/page.html", "w", encoding="utf-8") as f:
+    with open("data/page.html", "a", encoding="utf-8") as f:
         f.write(html_header)
         f.write(html_content)
         f.write(html_footer)
@@ -84,13 +84,13 @@ def fake_update():
     with open("data/today.txt", "w") as f:
         f.write(str(today))
 
+    with open("data/page.html", "w", encoding="utf-8") as f:
+        f.write("")
+
 
 if __name__ == '__main__':
     fake_update()
-    movies = get_movie_data(1)
-    save_to_html(movies)
-    batch_size = 10
-    for i in range(0, len(movies), batch_size):
-        batch = movies[i:i + batch_size]
-        save_to_xml(batch, i // batch_size + 1)
+    for page in range(1, 4):
+        movies = get_movie_data(page)
+        save_to_html(movies)
     os.system('git add . && git commit -m "auto generate xml." && git push')
