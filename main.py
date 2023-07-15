@@ -19,9 +19,12 @@ def get_movie_data(page_number):
     soup = BeautifulSoup(response.text, "lxml")
     entries = []
     for movie in soup.select("div.main-content div.ml-item"):
+        movie_title = movie.select_one("div.qtip-title").get_text(strip=True)
+        if "Hindi" in movie_title:
+            continue
         entries.append(
             {
-                "title": movie.select_one("div.qtip-title").get_text(strip=True),
+                "title": movie_title,
                 "image": movie.select_one("img").get("src")
             }
         )
