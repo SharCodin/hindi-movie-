@@ -20,7 +20,7 @@ def get_movie_data(page_number):
     entries = []
     for movie in soup.select("div.main-content div.ml-item"):
         movie_title = movie.select_one("div.qtip-title").get_text(strip=True)
-        if "Hindi" in movie_title:
+        if "hindi" in movie_title.lower():
             continue
         entries.append(
             {
