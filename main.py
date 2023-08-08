@@ -31,6 +31,7 @@ def get_movie_data(page_number):
     return entries
 
 
+# Alternate XML output
 def save_to_xml(entries, batch_number):
     root = Et.Element("movies")
     for entry in entries:
@@ -83,6 +84,8 @@ def save_to_html(entries):
 
 
 def fake_update():
+    # TODO: Use GitHub action and remove fake_update
+    """Fake adding update to project to allow GitHub push."""
     today = datetime.now()
     with open("data/today.txt", "w") as f:
         f.write(str(today))
