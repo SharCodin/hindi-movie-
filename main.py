@@ -1,9 +1,16 @@
 import os
 from datetime import datetime
+from pathlib import Path
 import xml.etree.ElementTree as Et
 
 import requests
 from bs4 import BeautifulSoup
+
+
+BASE_DIR = Path(__file__)
+DATA_DIR = BASE_DIR.parent / "data"
+TEXT_FILE = DATA_DIR / "today.txt"
+PAGE_FILE = DATA_DIR / "page.html"
 
 
 def get_movie_data(page_number):
@@ -42,7 +49,7 @@ def save_to_xml(entries, batch_number):
         image_elem.text = entry["image"]
     tree = Et.ElementTree(root)
     file_name = f"movies_{batch_number:02d}.xml"
-    tree.write(f"data/{file_name}")
+    tree.write(str(DATA_DIR / f"{file_name}"))
 
 
 def save_to_html(entries):
@@ -77,7 +84,7 @@ def save_to_html(entries):
         </html>
     """
 
-    with open("data/page.html", "a", encoding="utf-8") as f:
+    with open(str(PAGE_FILE), "a", encoding="utf-8") as f:
         f.write(html_header)
         f.write(html_content)
         f.write(html_footer)
@@ -87,10 +94,10 @@ def fake_update():
     # TODO: Use GitHub action and remove fake_update
     """Fake adding update to project to allow GitHub push."""
     today = datetime.now()
-    with open("data/today.txt", "w") as f:
+    with open(str(TEXT_FILE), "w") as f:
         f.write(str(today))
 
-    with open("data/page.html", "w", encoding="utf-8") as f:
+    with open(str(PAGE_FILE), "w", encoding="utf-8") as f:
         f.write("")
 
 
