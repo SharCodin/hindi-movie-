@@ -107,5 +107,5 @@ if __name__ == '__main__':
         movies = get_movie_data(page)
         save_to_html(movies)
     os.chdir(str(BASE_DIR.parent))
-    print(os.cwd())
+    print(os.getcwd())
     os.system('git add . && git commit -m "auto generate xml." && git push')
